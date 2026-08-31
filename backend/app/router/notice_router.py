@@ -9,23 +9,31 @@ from app.service.notice_service import (
     update_notice,
     delete_notice,
 )
-
+'''
+    Router for Notice Management Endpoints
+'''
 router = APIRouter(
     prefix="/notices",
     tags=["Notices"]
 )
 
-
+'''
+    POST /notices: Create a New Notice
+'''
 @router.post("/")
 def create_new_notice(notice: NoticeCreate):
     return create_notice(notice)
 
-
+'''
+    GET /notices: Retrieve All Notices
+'''
 @router.get("/")
 def get_notices():
     return get_all_notices()
 
-
+'''
+    GET /notices/{notice_id}: Retrieve a Notice by its ID
+'''
 @router.get("/{notice_id}")
 def get_notice(notice_id: str):
     notice = get_notice_by_id(notice_id)
@@ -35,7 +43,9 @@ def get_notice(notice_id: str):
 
     return notice
 
-
+'''
+    PUT /notices/{notice_id}: Replace an Existing Notice by its ID
+'''
 @router.put("/{notice_id}")
 def replace_existing_notice(notice_id: str, notice: NoticeCreate):
     updated_notice = replace_notice(notice_id, notice)
@@ -45,7 +55,9 @@ def replace_existing_notice(notice_id: str, notice: NoticeCreate):
 
     return updated_notice
 
-
+'''
+    PATCH /notices/{notice_id}: Update Specific Fields of an Existing Notice by its ID
+'''
 @router.patch("/{notice_id}")
 def update_existing_notice(notice_id: str, notice: NoticeUpdate):
     updated_notice = update_notice(notice_id, notice)
@@ -55,7 +67,9 @@ def update_existing_notice(notice_id: str, notice: NoticeUpdate):
 
     return updated_notice
 
-
+'''
+    DELETE /notices/{notice_id}: Delete a Notice by its ID
+'''
 @router.delete("/{notice_id}")
 def delete_existing_notice(notice_id: str):
     deleted = delete_notice(notice_id)
